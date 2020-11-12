@@ -43,6 +43,7 @@ colorscheme monokai_pro
 "set background=dark (uncomment this line if you want set a dark background in
 "a theme)
 
+"--- My own keymapping & shortcuts ---"
 let mapleader=" "
 let NERDTreeQuitOnOpen=1
 let g:user_emmet_mode='n'
@@ -62,7 +63,7 @@ imap ii <Esc>
 nnoremap j k
 nnoremap k j 
 
-"Colorblind (Mode + color with the change)
+"--- Colorblind (Mode + color with the change) ---"
 function! InsertStatuslineColor(mode)
   if a:mode == 'i'
     hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0

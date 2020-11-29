@@ -13,6 +13,8 @@ set sw=2
 set laststatus=2
 set relativenumber
 "set noshowmode
+autocmd Filetype javascript setlocal tabstop=2
+autocmd Filetype python setlocal tabstop=4
 
 "--- Pluggins & Theme ---"
 call plug#begin('~/.vim/plugged')
@@ -37,17 +39,23 @@ Plug 'prettier/vim-prettier', {
 
 call plug#end() 
 
-"--- Turning on the themes --"
+" -- Theme settings -- "
 set termguicolors
-colorscheme monokai_pro
-"set background=dark (uncomment this line if you want set a dark background in
-"a theme)
+"colorscheme monokai_pro
+colorscheme palenight
+set background=dark
+
 
 "--- My own keymapping & shortcuts ---"
 let mapleader=" "
 let NERDTreeQuitOnOpen=1
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
+let g:user_emmet_leader_key=','
+let g:lightline = { 'colorscheme': 'palenight' }
+let g:airline_theme = "palenight"
+let g:palenight_terminal_italics=1
+
 
 nmap <leader>s <Plug>(easymotion-s2)
 nmap <leader>nt :NERDTreeFind<CR> 
@@ -59,6 +67,9 @@ nmap <leader>q1 :q!<CR>
 nmap <leader>pi :PlugInstall<CR>
 nmap <leader>zs :AutoSaveToggle<CR>
 nmap <leader>codi :Codi<CR>
+nmap <leader>tw :tabnew<CR>
+nmap <leader>tn :tabn<CR>
+nmap <leader>tb :tabp<CR>
 imap ii <Esc>
 nnoremap j k
 nnoremap k j 
@@ -81,16 +92,17 @@ au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 
 hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 
-"--- Some awesome stuffs ---"
-set statusline=%f
-set statusline+=[%{strlen(&fenc)?&fenc:'none'},
-set statusline+=%{&ff}]
-set statusline+=%y
-set statusline+=%h
-set statusline+=%m
-set statusline+=%r
-set statusline+=\ %=
-set statusline+=Line:%l/%L[%p%%]
-set statusline+=\ Col:%c
-set statusline+=\ Buf:%n
-set statusline+=\ [%b][0x%B]\
+" Formats the statusline
+set statusline=%f                           " file name
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%y      "filetype
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=\ %=                        " align left
+set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
+set statusline+=\ Col:%c                    " current column
+set statusline+=\ Buf:%n                    " Buffer number
+set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
+

@@ -1,8 +1,8 @@
-  "--- Basic settings ---"
-set number 
+" -- Settings -- "
+set number
 set cursorline
 set mouse=a
-set mouse=r
+"set mouse=r
 set numberwidth=1
 set clipboard=unnamed
 syntax enable
@@ -12,16 +12,17 @@ set showmatch
 set sw=2
 set laststatus=2
 set relativenumber
-"set noshowmode
+set noshowmode
 autocmd Filetype javascript setlocal tabstop=2
 autocmd Filetype python setlocal tabstop=4
 
-"--- Pluggins & Theme ---"
+" -- Plug Zone -- "
 call plug#begin('~/.vim/plugged')
 "Theme
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 Plug 'phanviet/vim-monokai-pro'
+Plug 'drewtempelmeyer/palenight.vim'
 "Pluggins
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
@@ -33,10 +34,12 @@ Plug '907th/vim-auto-save'
 Plug 'metakirby5/codi.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'yarn install',
+"  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'itchyny/lightline.vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 call plug#end() 
 
 " -- Theme settings -- "
@@ -45,17 +48,17 @@ set termguicolors
 colorscheme palenight
 set background=dark
 
-
-"--- My own keymapping & shortcuts ---"
+" -- Remapping & reconfig -- "
 let mapleader=" "
 let NERDTreeQuitOnOpen=1
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
-let g:user_emmet_leader_key=','
 let g:lightline = { 'colorscheme': 'palenight' }
 let g:airline_theme = "palenight"
 let g:palenight_terminal_italics=1
-
+let g:lightline = {
+	\'colorscheme': 'ayu_mirage'
+	\}
 
 nmap <leader>s <Plug>(easymotion-s2)
 nmap <leader>nt :NERDTreeFind<CR> 
@@ -73,24 +76,6 @@ nmap <leader>tb :tabp<CR>
 imap ii <Esc>
 nnoremap j k
 nnoremap k j 
-
-"--- Colorblind (Mode + color with the change) ---"
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
-  elseif a:mode == 'r'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-    elseif a:mode == 'v'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
-
-hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 
 " Formats the statusline
 set statusline=%f                           " file name
